@@ -56,7 +56,20 @@ chmod a+x /etc/sing-box/update-singbox.sh
 read -p "请输入更新间隔小时数 (默认为12小时): " interval_choice
 interval_choice=${interval_choice:-12}
 
-# 添加定时任务
+# 检查是否已有定时任务
+if crontab -l 2>/dev/null | grep -q '/etc/sing-box/update-singbox.sh'; then
+    echo -e "${RED}检测到已有自动更新任务。${NC}"
+    read -p "是否重新设置自动更新任务？(y/n): " confirm_reset
+    if [[ "$confirm_reset" =~ ^[Yy]$ ]]; then
+        crontab -l 2>/dev/null | grep -v '/etc/sing-box/update-singbox.sh' | crontab -
+        echo "已删除旧的自动更新任务。"
+    else
+        echo -e "${CYAN}保持已有的自动更新任务。返回菜单。${NC}"
+        exit 0
+    fi
+fi
+
+# 添加新的定时任务
 (crontab -l 2>/dev/null; echo "0 */$interval_choice * * * /etc/sing-box/update-singbox.sh") | crontab -
 systemctl restart cron
 
