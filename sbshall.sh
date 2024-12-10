@@ -18,7 +18,7 @@ if ! command -v sudo &> /dev/null; then
     if [[ "$install_sudo" =~ ^[Yy]$ ]]; then
         apt-get update
         apt-get install -y sudo
-        if [[ $? -ne 0 ]]; then
+        if ! command -v sudo &> /dev/null; then
             echo -e "${RED}安装 sudo 失败，请手动安装 sudo 并重新运行此脚本。${NC}"
             exit 1
         fi
@@ -34,13 +34,13 @@ DEPENDENCIES=("wget" "nft")
 
 # 检查并安装缺失的依赖项
 for DEP in "${DEPENDENCIES[@]}"; do
-    if ! command -v $DEP &> /dev/null; then
+    if ! command -v "$DEP" &> /dev/null; then
         echo -e "${RED}$DEP 未安装。${NC}"
         read -rp "是否安装 $DEP?(y/n): " install_dep
         if [[ "$install_dep" =~ ^[Yy]$ ]]; then
             sudo apt-get update
-            sudo apt-get install -y $DEP
-            if [[ $? -ne 0 ]]; then
+            sudo apt-get install -y "$DEP"
+            if ! command -v "$DEP" &> /dev/null; then
                 echo -e "${RED}安装 $DEP 失败，请手动安装 $DEP 并重新运行此脚本。${NC}"
                 exit 1
             fi
@@ -82,7 +82,7 @@ sudo chown "$(whoami)":"$(whoami)" "$SCRIPT_DIR"
 # 下载并执行主脚本
 wget -q -O "$SCRIPT_DIR/menu.sh" "$MAIN_SCRIPT_URL"
 
-if [[ $? -ne 0 ]]; then
+if ! [ -f "$SCRIPT_DIR/menu.sh" ]; then
     echo -e "${RED}下载主脚本失败,请检查网络连接。${NC}"
     exit 1
 fi

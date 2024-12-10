@@ -54,13 +54,12 @@ download_script() {
     local RETRY_DELAY=5
 
     for ((i=1; i<=RETRIES; i++)); do
-        wget -q -O "$SCRIPT_DIR/$SCRIPT" "$BASE_URL/$SCRIPT"
-        if [ $? -eq 0 ]; then
+        if wget -q -O "$SCRIPT_DIR/$SCRIPT" "$BASE_URL/$SCRIPT"; then
             chmod +x "$SCRIPT_DIR/$SCRIPT"
             return 0
         else
             echo -e "${YELLOW}下载 $SCRIPT 失败，重试 $i/${RETRIES}...${NC}"
-            sleep $RETRY_DELAY
+            sleep "$RETRY_DELAY"
         fi
     done
 
@@ -73,11 +72,11 @@ parallel_download_scripts() {
     local pids=()
     for SCRIPT in "${SCRIPTS[@]}"; do
         download_script "$SCRIPT" &
-        pids+=($!)
+        pids+=("$!")
     done
 
     for pid in "${pids[@]}"; do
-        wait $pid
+        wait "$pid"
     done
 }
 
