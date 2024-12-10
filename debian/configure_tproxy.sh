@@ -14,24 +14,19 @@ CustomBypassIP='{ 192.168.0.0/16 }'  # 自定义绕过的 IP 地址集合
 # 读取当前模式
 MODE=$(grep -oP '(?<=^MODE=).*' /etc/sing-box/mode.conf)
 
-# 清理防火墙规则
-clearFirewallRules() {
-    IPRULE=$(ip rule show | grep $PROXY_ROUTE_TABLE)
-    if [ -n "$IPRULE" ]; then
-        ip -f inet rule del fwmark $PROXY_FWMARK lookup $PROXY_ROUTE_TABLE
-        ip -f inet route del local default dev $INTERFACE table $PROXY_ROUTE_TABLE
-        echo "清理 IP 规则"
-    fi
-
-    nft flush ruleset
-    echo "清理 nftables 规则"
+# 清理特定防火墙规则
+clearSingboxRules() {
+    nft list table inet sing-box >/dev/null 2>&1 && nft delete table inet sing-box
+    ip rule del fwmark $PROXY_FWMARK lookup $PROXY_ROUTE_TABLE 2>/dev/null
+    ip route del local default dev $INTERFACE table $PROXY_ROUTE_TABLE 2>/dev/null
+    echo "清理 sing-box 相关的防火墙规则"
 }
 
 # 仅在 TProxy 模式下应用防火墙规则
 if [ "$MODE" = "TProxy" ]; then
     echo "应用 TProxy 模式下的防火墙规则..."
-    
-    clearFirewallRules
+
+    clearSingboxRules
 
     # 设置 IP 规则和路由
     ip -f inet rule add fwmark $PROXY_FWMARK lookup $PROXY_ROUTE_TABLE
