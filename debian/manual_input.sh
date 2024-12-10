@@ -14,19 +14,19 @@ MODE=$(grep -oP '(?<=^MODE=).*' /etc/sing-box/mode.conf)
 
 while true; do
     # 提示用户输入参数
-    read -p "请输入后端地址(直接回车使用默认值): " BACKEND_URL
+    read -p "请输入后端地址(不填使用默认值): " BACKEND_URL
     if [ -z "$BACKEND_URL" ]; then
         BACKEND_URL=$(grep BACKEND_URL "$DEFAULTS_FILE" | cut -d'=' -f2-)
         echo -e "${CYAN}使用默认后端地址: $BACKEND_URL${NC}"
     fi
 
-    read -p "请输入订阅地址(直接回车使用默认值): " SUBSCRIPTION_URL
+    read -p "请输入订阅地址(不填使用默认值): " SUBSCRIPTION_URL
     if [ -z "$SUBSCRIPTION_URL" ]; then
         SUBSCRIPTION_URL=$(grep SUBSCRIPTION_URL "$DEFAULTS_FILE" | cut -d'=' -f2-)
         echo -e "${CYAN}使用默认订阅地址: $SUBSCRIPTION_URL${NC}"
     fi
 
-    read -p "请输入配置文件地址(直接回车使用默认值): " TEMPLATE_URL
+    read -p "请输入配置文件地址(不填使用默认值): " TEMPLATE_URL
     if [ -z "$TEMPLATE_URL" ]; then
         if [ "$MODE" = "TProxy" ]; then
             TEMPLATE_URL=$(grep TPROXY_TEMPLATE_URL "$DEFAULTS_FILE" | cut -d'=' -f2-)
