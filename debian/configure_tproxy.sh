@@ -99,6 +99,16 @@ table inet sing-box {
         meta l4proto { tcp, udp } meta mark set $PROXY_FWMARK
     }
 }
+
+chain prerouting {
+    type nat hook prerouting priority dstnat + 1; policy accept;
+
+    # 添加 DNAT 规则，将特定端口的流量重定向到内网服务
+    meta nfproto ipv4 meta l4proto { tcp, udp } th dport 80 dnat ip to 192.168.0.2 counter packets 0 bytes 0
+
+    # 保留地址绕过
+    ip daddr @RESERVED_IPSET accept
+}
 EOF
 
     # 应用防火墙规则和 IP 路由
