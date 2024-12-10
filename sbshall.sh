@@ -81,6 +81,7 @@ sudo chown "$(whoami)":"$(whoami)" "$SCRIPT_DIR"
 
 # 下载并执行主脚本
 wget -q -O "$SCRIPT_DIR/menu.sh" "$MAIN_SCRIPT_URL"
+echo -e "${GREEN}脚本下载中,请耐心等待...${NC}"
 
 if ! [ -f "$SCRIPT_DIR/menu.sh" ]; then
     echo -e "${RED}下载主脚本失败,请检查网络连接。${NC}"
