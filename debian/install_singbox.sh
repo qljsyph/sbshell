@@ -60,19 +60,26 @@ else
     fi
 
     # 选择安装稳定版或测试版
-    read -rp "请选择安装版本(1: 稳定版, 2: 测试版）: " version_choice
-    if [[ "$version_choice" -eq 1 ]]; then
-        echo "安装稳定版..."
-        sudo apt-get install sing-box -yq > /dev/null 2>&1
-        echo "安装已完成"
-    elif [[ "$version_choice" -eq 2 ]]; then
-        echo "安装测试版..."
-        sudo apt-get install sing-box-beta -yq > /dev/null 2>&1
-        echo "安装已完成"
-    else
-        echo "无效的选择"
-        exit 1
-    fi
+    while true; do
+        read -rp "请选择安装版本(1: 稳定版, 2: 测试版): " version_choice
+        case $version_choice in
+            1)
+                echo "安装稳定版..."
+                sudo apt-get install sing-box -yq > /dev/null 2>&1
+                echo "安装已完成"
+                break
+                ;;
+            2)
+                echo "安装测试版..."
+                sudo apt-get install sing-box-beta -yq > /dev/null 2>&1
+                echo "安装已完成"
+                break
+                ;;
+            *)
+                echo -e "${RED}无效的选择，请输入 1 或 2。${NC}"
+                ;;
+        esac
+    done
 
     if command -v sing-box &> /dev/null; then
         sing_box_version=$(sing-box version | grep 'sing-box version' | awk '{print $3}')

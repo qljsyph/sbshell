@@ -53,16 +53,28 @@ if command -v sing-box &> /dev/null; then
     echo -e "${CYAN}测试版最新版本：${NC} $beta_version"
     
     # 提供切换版本的选项
-    read -rp "是否切换版本(1: 稳定版, 2: 测试版） (当前版本: $current_version, 回车取消操作): " switch_choice
-    if [[ "$switch_choice" -eq 1 ]]; then
-        echo "选择了切换到稳定版"
-        sudo apt-get install sing-box -y
-    elif [[ "$switch_choice" -eq 2 ]]; then
-        echo "选择了切换到测试版"
-        sudo apt-get install sing-box-beta -y
-    else
-        echo "不进行版本切换"
-    fi
+    while true; do
+        read -rp "是否切换版本(1: 稳定版, 2: 测试版） (当前版本: $current_version, 回车取消操作): " switch_choice
+        case $switch_choice in
+            1)
+                echo "选择了切换到稳定版"
+                sudo apt-get install sing-box -y
+                break
+                ;;
+            2)
+                echo "选择了切换到测试版"
+                sudo apt-get install sing-box-beta -y
+                break
+                ;;
+            '')
+                echo "不进行版本切换"
+                break
+                ;;
+            *)
+                echo -e "${RED}无效的选择，请输入 1 或 2。${NC}"
+                ;;
+        esac
+    done
 else
     echo -e "${RED}sing-box 未安装${NC}"
 fi
