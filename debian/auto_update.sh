@@ -12,9 +12,6 @@ MANUAL_FILE="/etc/sing-box/manual.conf"
 cat > /etc/sing-box/update-singbox.sh <<EOF
 #!/bin/bash
 
-# 停止 sing-box 服务
-systemctl stop sing-box
-
 # 读取手动输入的配置参数
 BACKEND_URL=\$(grep BACKEND_URL $MANUAL_FILE | cut -d'=' -f2-)
 SUBSCRIPTION_URL=\$(grep SUBSCRIPTION_URL $MANUAL_FILE | cut -d'=' -f2-)
@@ -23,17 +20,22 @@ TEMPLATE_URL=\$(grep TEMPLATE_URL $MANUAL_FILE | cut -d'=' -f2-)
 # 构建完整的配置文件URL
 FULL_URL="\${BACKEND_URL}/config/\${SUBSCRIPTION_URL}&file=\${TEMPLATE_URL}"
 
+# 备份现有配置文件
 [ -f "/etc/sing-box/config.json" ] && cp /etc/sing-box/config.json /etc/sing-box/config.json.backup
+
+# 下载并验证新配置文件
 if curl -L --connect-timeout 10 --max-time 30 "\$FULL_URL" -o /etc/sing-box/config.json; then
     if ! sing-box check -c /etc/sing-box/config.json; then
+        echo "新配置文件验证失败，恢复备份..."
         [ -f "/etc/sing-box/config.json.backup" ] && cp /etc/sing-box/config.json.backup /etc/sing-box/config.json
-        exit 1
     fi
 else
-    exit 1
+    echo "下载配置文件失败，恢复备份..."
+    [ -f "/etc/sing-box/config.json.backup" ] && cp /etc/sing-box/config.json.backup /etc/sing-box/config.json
 fi
-sleep 5
-systemctl start sing-box
+
+# 重启 sing-box 服务
+systemctl restart sing-box
 EOF
 
 chmod a+x /etc/sing-box/update-singbox.sh
