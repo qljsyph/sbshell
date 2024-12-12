@@ -34,13 +34,19 @@ DEPENDENCIES=("wget" "nftables")
 
 # 检查并安装缺失的依赖项
 for DEP in "${DEPENDENCIES[@]}"; do
-    if ! command -v "$DEP" &> /dev/null; then
+    if [ "$DEP" == "nftables" ]; then
+        CHECK_CMD="nft --version"
+    else
+        CHECK_CMD="wget --version"
+    fi
+
+    if ! $CHECK_CMD &> /dev/null; then
         echo -e "${RED}$DEP 未安装。${NC}"
         read -rp "是否安装 $DEP?(y/n): " install_dep
         if [[ "$install_dep" =~ ^[Yy]$ ]]; then
             sudo apt-get update
             sudo apt-get install -y "$DEP"
-            if ! command -v "$DEP" &> /dev/null; then
+            if ! $CHECK_CMD &> /dev/null; then
                 echo -e "${RED}安装 $DEP 失败，请手动安装 $DEP 并重新运行此脚本。${NC}"
                 exit 1
             fi
