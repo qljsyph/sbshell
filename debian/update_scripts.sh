@@ -37,6 +37,25 @@ fi
 LOCAL_VERSION=$(grep '^# 版本:' "$SCRIPT_DIR/menu.sh" | awk '{print $3}')
 REMOTE_VERSION=$(grep '^# 版本:' "$TEMP_DIR/menu.sh" | awk '{print $3}')
 
+# 检查远程版本是否为空
+if [ -z "$REMOTE_VERSION" ]; then
+    echo -e "${RED}远程版本获取失败，请检查网络连接。${NC}"
+    read -rp "是否重试？(y/n): " retry_choice
+    if [[ "$retry_choice" =~ ^[Yy]$ ]]; then
+        wget -q -O "$TEMP_DIR/menu.sh" "$MENU_SCRIPT_URL"
+        REMOTE_VERSION=$(grep '^# 版本:' "$TEMP_DIR/menu.sh" | awk '{print $3}')
+        if [ -z "$REMOTE_VERSION" ]; then
+            echo -e "${RED}远程版本获取失败，请检查网络连接后再试。返回菜单。${NC}"
+            rm -rf "$TEMP_DIR"
+            exit 1
+        fi
+    else
+        echo -e "${RED}请检查网络连接后再试。返回菜单。${NC}"
+        rm -rf "$TEMP_DIR"
+        exit 1
+    fi
+fi
+
 # 输出检测到的版本
 echo -e "${CYAN}检测到的版本：本地版本 $LOCAL_VERSION,远程版本 $REMOTE_VERSION${NC}"
 
