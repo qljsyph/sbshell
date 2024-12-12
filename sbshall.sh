@@ -8,6 +8,7 @@ SCRIPT_DIR="/etc/sing-box/scripts"
 
 # 定义颜色
 GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # 无颜色
 
@@ -88,7 +89,7 @@ sudo chown "$(whoami)":"$(whoami)" "$SCRIPT_DIR"
 # 下载并执行主脚本
 wget -q -O "$SCRIPT_DIR/menu.sh" "$MAIN_SCRIPT_URL"
 echo -e "${GREEN}脚本下载中,请耐心等待...${NC}"
-echo -e "${GREEN}注意:安装更新singbox尽量使用代理环境,运行singbox切记关闭代理!${NC}"
+echo -e "${YELLOW}注意:安装更新singbox尽量使用代理环境,运行singbox切记关闭代理!${NC}"
 
 if ! [ -f "$SCRIPT_DIR/menu.sh" ]; then
     echo -e "${RED}下载主脚本失败,请检查网络连接。${NC}"
