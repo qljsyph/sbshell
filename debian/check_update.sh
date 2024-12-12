@@ -5,6 +5,7 @@ CYAN='\033[0;36m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+echo "正在检测sing-box最新版本..."
 # 更新包信息
 sudo apt-get update -qq > /dev/null 2>&1
 
