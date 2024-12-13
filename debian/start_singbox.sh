@@ -36,7 +36,7 @@ start_singbox() {
 
     if [ "$STATUS_CODE" -eq 200 ]; then
         echo -e "${RED}当前网络处于代理环境, 启动 sing-box 需要直连, 请设置!${NC}"
-        read -rp "是否执行网络设置脚本(目前不支持armbian)?(y/n/skip): " network_choice
+        read -rp "是否执行网络设置脚本(暂只支持debian)?(y/n/skip): " network_choice
         if [[ "$network_choice" =~ ^[Yy]$ ]]; then
             bash "$SCRIPT_DIR/set_network.sh"
             STATUS_CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 "https://www.google.com")
