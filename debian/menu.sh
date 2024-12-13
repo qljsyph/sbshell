@@ -2,7 +2,7 @@
 
 #################################################
 # 描述: Debian/Ubuntu/Armbian 官方sing-box 全自动脚本
-# 版本: 1.2.2
+# 版本: 1.2.3
 # 作者: Youtube: 七尺宇
 #################################################
 
@@ -132,7 +132,13 @@ auto_setup() {
 
 # 检查是否需要初始化
 if [ ! -f "$INITIALIZED_FILE" ]; then
-    initialize
+    echo -e "${CYAN}进入初始化引导设置,回车继续输入skip跳过${NC}"
+    read -r init_choice
+    if [[ "$init_choice" =~ ^[Ss]kip$ ]]; then
+        echo -e "${CYAN}跳过初始化引导，直接进入菜单...${NC}"
+    else
+        initialize
+    fi
 fi
 
 # 添加别名到 .bashrc，如果已存在则不再添加
@@ -157,7 +163,7 @@ show_menu() {
     echo -e "${GREEN}6. 安装/更新 sing-box${NC}"
     echo -e "${GREEN}7. 修改默认配置参数${NC}"
     echo -e "${GREEN}8. 设置自启动${NC}"
-    echo -e "${GREEN}9. 网络设置${NC}"
+    echo -e "${GREEN}9. 网络设置(只支持debian)${NC}"
     echo -e "${GREEN}10. 常用命令${NC}"
     echo -e "${GREEN}11. 更新脚本${NC}"
     echo -e "${GREEN}0. 退出${NC}"
