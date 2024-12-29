@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 定义主脚本的下载URL
-MAIN_SCRIPT_URL="https://ghps.cc/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/debian/menu.sh"
+MAIN_SCRIPT_URL="https://ghproxy.cc/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/debian/menu.sh"
 
 # 脚本下载目录
 SCRIPT_DIR="/etc/sing-box/scripts"
