@@ -26,20 +26,20 @@ bash <(curl -sL https://ghproxy.cc/https://raw.githubusercontent.com/qichiyuhub/
 ## 适配配置文件：
 
 ### 测试版：  
-tproxy：
-https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tproxy_dev.json  
+tproxy： 
+https://ghproxy.cc/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tproxy_dev.json  
 
-tun：
-https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tun_dev.json  
+tun： 
+https://ghproxy.cc/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tun_dev.json  
 
   
 
 ### 稳定版：  
-tproxy：
-https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tproxy.json  
+tproxy：  
+https://ghproxy.cc/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tproxy.json  
 
-tun：
-https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tun.json  
+tun：  
+https://ghproxy.cc/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tun.json  
 
 
 ## Youtube视频教程：
