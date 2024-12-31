@@ -88,6 +88,7 @@ SCRIPTS=(
     "manage_autostart.sh"
     "check_config.sh"
     "update_scripts.sh"
+    "update_ui.sh"
     "menu.sh"
 )
 

@@ -217,6 +217,7 @@ handle_choice() {
             ;;
         12)
             bash "$SCRIPT_DIR/update_ui.sh"
+            ;;
         0)
             exit 0
             ;;
