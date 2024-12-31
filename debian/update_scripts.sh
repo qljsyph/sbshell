@@ -147,6 +147,7 @@ function reset_update() {
 echo -e "${CYAN}请选择更新方式：${NC}"
 echo -e "${GREEN}1. 常规更新${NC}"
 echo -e "${GREEN}2. 重置更新${NC}"
+echo -e "${GREEN}3. 强制更新${NC}"
 read -rp "请选择操作: " update_choice
 
 case $update_choice in
@@ -166,6 +167,15 @@ case $update_choice in
             reset_update
         else
             echo -e "${CYAN}重置更新已取消。${NC}"
+        fi
+        ;;
+    3)
+        echo -e "${RED}强制更新将忽略版本检查，直接更新所有脚本。${NC}"
+        read -rp "是否继续强制更新？(y/n): " confirm
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            regular_update
+        else
+            echo -e "${CYAN}强制更新已取消。${NC}"
         fi
         ;;
     *)
