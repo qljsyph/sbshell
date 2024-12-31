@@ -61,9 +61,16 @@ echo -e "${CYAN}检测到的版本：本地版本 $LOCAL_VERSION,远程版本 $R
 
 # 比较版本号
 if [ "$LOCAL_VERSION" == "$REMOTE_VERSION" ]; then
-    echo -e "${GREEN}脚本版本为最新，无需升级。${NC}"
-    rm -rf "$TEMP_DIR"
-    exit 0
+    echo -e "${GREEN}脚本版本为最新。${NC}"
+    read -rp "是否进行强制更新？(y/n): " force_update_choice
+    if [[ "$force_update_choice" =~ ^[Yy]$ ]]; then
+        echo -e "${RED}强制更新将忽略版本检查，直接更新所有脚本。${NC}"
+        regular_update
+    else
+        echo -e "${CYAN}已取消强制更新。${NC}"
+        rm -rf "$TEMP_DIR"
+        exit 0
+    fi
 else
     echo -e "${RED}检测到新版本，准备升级。${NC}"
 fi
