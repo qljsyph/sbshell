@@ -22,6 +22,31 @@ else
     fi
 fi
 
+# 添加启动和停止命令到现有服务脚本
+if [ -f /etc/init.d/sing-box ]; then
+    sed -i '/start_service()/,/}/d' /etc/init.d/sing-box
+    sed -i '/stop_service()/,/}/d' /etc/init.d/sing-box
+fi
+
+cat << 'EOF' >> /etc/init.d/sing-box
+
+start_service() {
+    procd_open_instance
+    procd_set_param command "/usr/bin/sing-box" run -c "/etc/sing-box/config.json"
+    procd_set_param stdout 1
+    procd_set_param stderr 1
+    procd_set_param respawn
+    procd_close_instance
+}
+
+stop_service() {
+    killall sing-box
+}
+EOF
+
+# 确保服务脚本具有可执行权限
+chmod +x /etc/init.d/sing-box
+
 # 启用并启动 sing-box 服务
 /etc/init.d/sing-box enable
 /etc/init.d/sing-box start

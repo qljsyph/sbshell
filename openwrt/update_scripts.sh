@@ -22,8 +22,8 @@ echo -e "${CYAN}正在检测版本，请耐心等待...${NC}"
 # 确保脚本目录和临时目录存在并设置权限
 mkdir -p "$SCRIPT_DIR"
 mkdir -p "$TEMP_DIR"
-chown "$(whoami)":"$(whoami)" "$SCRIPT_DIR"
-chown "$(whoami)":"$(whoami)" "$TEMP_DIR"
+chown "$(id -u)":"$(id -g)" "$SCRIPT_DIR"
+chown "$(id -u)":"$(id -g)" "$TEMP_DIR"
 
 # 下载远程脚本到临时目录
 wget -q -O "$TEMP_DIR/menu.sh" "$MENU_SCRIPT_URL"

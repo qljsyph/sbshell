@@ -67,8 +67,8 @@ if [ "$MODE" = "TProxy" ]; then
     clearSingboxRules
 
     # 设置 IP 规则和路由
-    ip -f inet rule add fwmark $PROXY_FWMARK lookup $PROXY_ROUTE_TABLE
-    ip -f inet route add local default dev "${INTERFACE}" table $PROXY_ROUTE_TABLE
+    ip rule add fwmark $PROXY_FWMARK table $PROXY_ROUTE_TABLE
+    ip route add local default dev "$INTERFACE" table $PROXY_ROUTE_TABLE
     sysctl -w net.ipv4.ip_forward=1 > /dev/null
 
     # 确保目录存在
@@ -140,6 +140,7 @@ table inet sing-box {
 EOF
 
     # 应用防火墙规则和 IP 路由
+    echo "Applying nftables rules..."  # 添加调试信息
     nft -f /etc/sing-box/nft/nftables.conf
 
     # 持久化防火墙规则
