@@ -144,8 +144,9 @@ if [ ! -f "$INITIALIZED_FILE" ]; then
     fi
 fi
 
-# 添加别名到 .bashrc，如果已存在则不再添加
-if ! grep -q "alias sb=" ~/.bashrc; then
+# 添加别名
+[ -f ~/.bashrc ] || touch ~/.bashrc
+if ! grep -q "alias sb=" ~/.bashrc || true; then
     echo "alias sb='bash $SCRIPT_DIR/menu.sh menu'" >> ~/.bashrc
 fi
 
