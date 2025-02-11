@@ -50,6 +50,10 @@ start_service() {
         /etc/sing-box/scripts/configure_tun.sh
     fi
 }
+
+stop_service() {
+    killall sing-box
+}
 EOF
 
 # 确保服务脚本具有可执行权限
