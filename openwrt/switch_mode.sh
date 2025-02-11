@@ -15,6 +15,9 @@ fi
 # 切换模式的逻辑
 echo "切换模式开始...请根据提示输入操作。"
 
+# Ensure mode.conf exists
+touch /etc/sing-box/mode.conf
+
 while true; do
     # 选择模式
     read -rp "请选择模式(1: TProxy 模式, 2: TUN 模式): " mode_choice
