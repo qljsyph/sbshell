@@ -15,8 +15,9 @@ fi
 # 切换模式的逻辑
 echo "切换模式开始...请根据提示输入操作。"
 
-# Ensure mode.conf exists
-touch /etc/sing-box/mode.conf
+# 确定mode.conf文件存在
+[ -f /etc/sing-box/mode.conf ] || touch /etc/sing-box/mode.conf
+chmod 777 /etc/sing-box/mode.conf
 
 while true; do
     # 选择模式
