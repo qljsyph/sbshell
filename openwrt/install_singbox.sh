@@ -33,11 +33,22 @@ cat << 'EOF' >> /etc/init.d/sing-box
 
 start_service() {
     procd_open_instance
-    procd_set_param command "/usr/bin/sing-box" run -c "/etc/sing-box/config.json"
-    procd_set_param stdout 1
-    procd_set_param stderr 1
+    procd_set_param command /usr/bin/sing-box run -c /etc/sing-box/config.json
     procd_set_param respawn
+    procd_set_param stderr 1
+    procd_set_param stdout 1
     procd_close_instance
+    
+    # 等待服务完全启动
+    sleep 3
+    
+    # 读取模式并应用防火墙规则
+    MODE=$(grep -oE '^MODE=.*' /etc/sing-box/mode.conf | cut -d'=' -f2)
+    if [ "$MODE" = "TProxy" ]; then
+        /etc/sing-box/scripts/configure_tproxy.sh
+    elif [ "$MODE" = "TUN" ]; then
+        /etc/sing-box/scripts/configure_tun.sh
+    fi
 }
 
 stop_service() {

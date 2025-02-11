@@ -55,7 +55,6 @@ case $autostart_choice in
         
         # 禁用并停止服务
         /etc/init.d/sing-box disable
-        /etc/init.d/sing-box stop
         cmd_status=$?
 
         if [ "$cmd_status" -eq 0 ]; then
