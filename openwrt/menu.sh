@@ -126,11 +126,14 @@ auto_setup() {
     if [ -f /etc/init.d/sing-box ]; then
         /etc/init.d/sing-box stop
     fi
+    mkdir -p /etc/sing-box/
+    [ -f /etc/sing-box/mode.conf ] || touch /etc/sing-box/mode.conf
+    chmod 777 /etc/sing-box/mode.conf
     bash "$SCRIPT_DIR/check_environment.sh"
     command -v sing-box &> /dev/null || bash "$SCRIPT_DIR/install_singbox.sh" || bash "$SCRIPT_DIR/check_update.sh"
     bash "$SCRIPT_DIR/switch_mode.sh"
     bash "$SCRIPT_DIR/manual_input.sh"
-    bash "$SCRIPT_DIR/start_singbox.sh"
+    bash "$SCRIPT_DIR/start_singbox.sh"  
 }
 
 # 检查是否需要初始化
@@ -144,8 +147,9 @@ if [ ! -f "$INITIALIZED_FILE" ]; then
     fi
 fi
 
-# 添加别名到 .bashrc，如果已存在则不再添加
-if ! grep -q "alias sb=" ~/.bashrc; then
+# 添加别名
+[ -f ~/.bashrc ] || touch ~/.bashrc
+if ! grep -q "alias sb=" ~/.bashrc || true; then
     echo "alias sb='bash $SCRIPT_DIR/menu.sh menu'" >> ~/.bashrc
 fi
 
