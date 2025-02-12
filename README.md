@@ -23,9 +23,9 @@ Sbshell 是一款针对 官方sing-box 的辅助运行脚本，旨在解决官�
 ```
 bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/sbshall.sh)
 ```
-（初始化运行结束，输入“**sb**”进入菜单）
-目前支持系统为deiban/ubuntu/armbian/openwrt。  
-防火墙仅支持nftables，不支持iptables。
+- 初始化运行结束，输入“**sb**”进入菜单
+- 目前支持系统为deiban/ubuntu/armbian/openwrt。  
+- 防火墙仅支持nftables，不支持iptables。
 
 ### 系统信息自动显示美化脚本：(作者-千里)  
 ```
