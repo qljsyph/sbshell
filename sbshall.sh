@@ -70,11 +70,6 @@ if grep -qi 'debian\|ubuntu\|armbian' /etc/os-release; then
     done
 elif grep -qi 'openwrt' /etc/os-release; then
     echo -e "${GREEN}系统为OpenWRT,支持运行此脚本。${NC}"
-    # 检查OpenWRT系统是否安装了iptables防火墙
-    if opkg list-installed | grep -q "iptables"; then
-        echo -e "${RED}OpenWRT系统中安装了iptables防火墙，脚本将退出。${NC}"
-        exit 1
-    fi
     MAIN_SCRIPT_URL="$OPENWRT_MAIN_SCRIPT_URL"
     DEPENDENCIES=("nftables")
 
