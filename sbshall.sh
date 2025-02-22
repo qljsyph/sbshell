@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#################################################
+# 描述: 官方sing-box 全自动辅助脚本
+# 版本: 1.7.1
+# 作者: Youtube: 七尺宇
+#################################################
+
 # 定义主脚本的下载URL
 DEBIAN_MAIN_SCRIPT_URL="https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/debian/menu.sh"
 OPENWRT_MAIN_SCRIPT_URL="https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/openwrt/menu.sh"
