@@ -18,7 +18,6 @@ Sbshell 是一款针对 官方sing-box 的辅助运行脚本，旨在解决官�
 
 目前支持系统为deiban/ubuntu/armbian以及openwrt！
 
-## **[推荐机场](https://st1.hosbb.com/#/register?code=HZ4Ju1me)**
 ## 一键脚本：(请自行安装curl和bash，如果缺少的话)
 ```
 bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/sbshall.sh)
@@ -53,4 +52,9 @@ https://t.me/qichiyuchat
 
 ## 其他问题：
 
-**请查看[wiki](https://github.com/qichiyuhub/sbshell/wiki)**
+**请查看[wiki](https://github.com/qichiyuhub/sbshell/wiki)**  
+
+## 机场推荐：
+
+**[良心推荐](https://www.qichiyu.com/343-2)**
+
