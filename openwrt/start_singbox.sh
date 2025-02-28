@@ -45,7 +45,6 @@ start_singbox() {
 
     sleep 2  # 等待 sing-box 启动
     
-    apply_firewall
 
     if /etc/init.d/sing-box status | grep -q "running"; then
         echo -e "${GREEN}sing-box 启动成功${NC}"
