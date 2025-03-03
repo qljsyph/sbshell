@@ -41,7 +41,7 @@ start_singbox() {
     fi
 
     # 启动 sing-box 服务
-    /etc/init.d/sing-box restart
+    /etc/init.d/sing-box start
 
     sleep 2  # 等待 sing-box 启动
     

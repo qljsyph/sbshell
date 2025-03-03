@@ -52,7 +52,7 @@ start_service() {
 }
 
 stop_service() {
-    killall sing-box
+    procd_kill "$NAME" 2>/dev/null
 }
 EOF
 
