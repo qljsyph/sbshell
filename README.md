@@ -56,5 +56,5 @@ https://t.me/qichiyuchat
 
 ## 机场推荐：
 
-**[良心推荐](https://www.qichiyu.com/343-2)**
+**[良心推荐](https://www.qichiyu.com/tuijian)**
 
