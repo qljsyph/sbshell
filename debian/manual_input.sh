@@ -62,7 +62,11 @@ EOF
         echo "手动输入的配置已更新"
 
         # 构建完整的配置文件URL
-        FULL_URL="${BACKEND_URL}/config/${SUBSCRIPTION_URL}&file=${TEMPLATE_URL}"
+        if [ -n "$BACKEND_URL" ] && [ -n "$SUBSCRIPTION_URL" ]; then
+            FULL_URL="${BACKEND_URL}/config/${SUBSCRIPTION_URL}&file=${TEMPLATE_URL}"
+        else
+            FULL_URL="${TEMPLATE_URL}"
+        fi
         echo "生成完整订阅链接: $FULL_URL"
 
         while true; do
