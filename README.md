@@ -20,7 +20,7 @@ Sbshell 是一款针对 官方sing-box 的辅助运行脚本，旨在解决官�
 
 ## 一键脚本：(请自行安装curl和bash，如果缺少的话)
 ```
-bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/sbshall.sh)
+bash <(curl -sL https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/sbshall.sh)
 ```
 - 初始化运行结束，输入“**sb**”进入菜单
 - 目前支持系统为deiban/ubuntu/armbian/openwrt。  
@@ -28,7 +28,7 @@ bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/
 
 ### 系统信息自动显示美化脚本：(作者-千里)  
 ```
-bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qljsyph/DPInfo-script/refs/heads/main/auto-sysinfo.sh)
+bash <(curl -sL https://gh-proxy.com/https://raw.githubusercontent.com/qljsyph/DPInfo-script/refs/heads/main/auto-sysinfo.sh)
 ```
   执行后每次进入ssh会自动显示很多必要信息！
   作者仓库：  
@@ -38,10 +38,10 @@ bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qljsyph/DPI
 
 ### 稳定版(1.11)：  
 tproxy：  
-https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tproxy.json  
+https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tproxy.json  
 
 tun：  
-https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tun.json  
+https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/config_template/config_tun.json  
 
 
 ## Youtube视频教程：

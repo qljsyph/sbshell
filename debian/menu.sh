@@ -22,7 +22,7 @@ sudo mkdir -p "$SCRIPT_DIR"
 sudo chown "$(whoami)":"$(whoami)" "$SCRIPT_DIR"
 
 # 脚本的URL基础路径
-BASE_URL="https://ghfast.top/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/debian"
+BASE_URL="https://gh-proxy.com/https://raw.githubusercontent.com/qichiyuhub/sbshell/refs/heads/master/debian"
 
 # 脚本列表
 SCRIPTS=(
