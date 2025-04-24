@@ -1,0 +1,19 @@
+name: Feature request
+description: "Suggest an idea for this project"
+title: "[Feature Request]"
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 功能描述
+      description: 在此描述你想要的功能
+    validations:
+      required: true
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 附加信息
+      description: 你觉得对添加此功能有帮助的其它信息
+    validations:
+      required: false
