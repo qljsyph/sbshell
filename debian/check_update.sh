@@ -21,13 +21,19 @@ if command -v sing-box &> /dev/null; then
         read -rp "是否切换版本(1: 稳定版, 2: 测试版） (当前版本: $current_version, 回车取消操作): " switch_choice
         case $switch_choice in
             1)
-                echo "选择了切换到稳定版"
-                sudo apt-get install sing-box -y
+                echo "下载稳定版..."
+                apt-get download sing-box
+                sudo apt-get remove --auto-remove sing-box-beta -y
+                sudo dpkg -i sing-box_*.deb
+                rm -f sing-box_*.deb
                 break
                 ;;
             2)
-                echo "选择了切换到测试版"
-                sudo apt-get install sing-box-beta -y
+                echo "下载测试版..."
+                apt-get download sing-box-beta
+                sudo apt-get remove --auto-remove sing-box -y
+                sudo dpkg -i sing-box-beta_*.deb
+                rm -f sing-box-beta_*.deb
                 break
                 ;;
             '')

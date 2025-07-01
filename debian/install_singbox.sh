@@ -13,7 +13,13 @@ else
     sudo mkdir -p /etc/apt/keyrings
     sudo curl -fsSL https://sing-box.app/gpg.key -o /etc/apt/keyrings/sagernet.asc
     sudo chmod a+r /etc/apt/keyrings/sagernet.asc
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/sagernet.asc] https://deb.sagernet.org/ * *" | sudo tee /etc/apt/sources.list.d/sagernet.list > /dev/null
+    echo "Types: deb
+URIs: https://deb.sagernet.org/
+Suites: *
+Components: *
+Enabled: yes
+Signed-By: /etc/apt/keyrings/sagernet.asc
+" | sudo tee /etc/apt/sources.list.d/sagernet.sources > /dev/null
 
     # 始终更新包列表
     echo "正在更新包列表，请稍候..."
@@ -44,6 +50,15 @@ else
     if command -v sing-box &> /dev/null; then
         sing_box_version=$(sing-box version | grep 'sing-box version' | awk '{print $3}')
         echo -e "${CYAN}sing-box 安装成功，版本：${NC} $sing_box_version"
+         
+        if ! id sing-box &>/dev/null; then
+            echo "正在创建 sing-box 系统用户"
+            sudo useradd --system --no-create-home --shell /usr/sbin/nologin sing-box
+        fi
+        echo "正在设置sing-box权限..."
+        sudo mkdir -p /var/lib/sing-box
+        sudo chown -R sing-box:sing-box /var/lib/sing-box
+        sudo chown -R sing-box:sing-box /etc/sing-box
     else
         echo -e "${RED}sing-box 安装失败，请检查日志或网络配置${NC}"
     fi
