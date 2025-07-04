@@ -20,7 +20,7 @@ Sbshell 是一款针对 官方sing-box 的辅助运行脚本，旨在解决官�
 
 ## 一键脚本：(请自行安装curl和bash，如果缺少的话)
 ```
-bash <(curl -sL https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/sbshall.sh)
+bash <(curl -sL https://ghfast.top/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/sbshall.sh)
 ```
 - 初始化运行结束，输入“**sb**”进入菜单
 - 目前支持系统为deiban/ubuntu/armbian/openwrt。  
