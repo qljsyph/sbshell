@@ -82,31 +82,57 @@ Signed-By: /etc/apt/keyrings/sagernet.asc
             if [[ -f "$service_file" ]]; then
                 echo "找到 sing-box 服务文件：$service_file"
 
-                # 检查是否已有 User=sing-box
-                if grep -q '^\s*User=sing-box' "$service_file"; then
-                    echo "User=sing-box 已存在于 [Service] 下，无需修改。"
+                # 检查是否已有 User=sing-box 和 StateDirectory=sing-box
+                has_user=$(grep -E '^\s*User=sing-box' "$service_file")
+                has_state=$(grep -E '^\s*StateDirectory=sing-box' "$service_file")
+
+                if [[ -n "$has_user" && -n "$has_state" ]]; then
+                    echo "[Service] 段中已经包含 User=sing-box 和 StateDirectory=sing-box，无需修改。"
                 else
-                    echo "User=sing-box 未设置，准备插入..."
-                    awk '
+                    echo "准备插入缺失配置..."
+
+                    awk -v add_user="$([[ -z "$has_user" ]] && echo 1 || echo 0)" \
+                        -v add_state="$([[ -z "$has_state" ]] && echo 1 || echo 0)" '
                         BEGIN { in_service=0 }
-                        /^\[Service\]/ { print; in_service=1; next }
-                        in_service && /^[^\[]/ {
-                            print "User=sing-box"
-                            in_service=0
+                        {
+                            print
+                            if ($0 ~ /^\[Service\]/) {
+                                in_service = 1
+                                next
+                            }
+
+                            if (in_service == 1) {
+                                if (add_user == 1) {
+                                    print "User=sing-box"
+                                    if (add_state == 1) {
+                                        print "StateDirectory=sing-box"
+                                        add_state = 0
+                                    }
+                                    add_user = 0
+                                } else if (add_state == 1 && $0 ~ /^User=sing-box/) {
+                                    print
+                                    print "StateDirectory=sing-box"
+                                    add_state = 0
+                                    next
+                                }
+                            }
                         }
-                        { print }
                     ' "$service_file" > "${service_file}.tmp" && mv "${service_file}.tmp" "$service_file"
 
-                    echo "已插入 User=sing-box 到 [Service] 段。"
+                    echo "修改完成，执行 systemctl daemon-reexec"
                     systemctl daemon-reexec
-                    echo "已执行 systemctl daemon-reexec"
                 fi
             else
                 echo "未找到服务文件：$service_file"
             fi
         else
             echo "当前 sing-box 版本不是 1.11.x，跳过处理。"
-        fi        
+    fi 
+        # 重启 sing-box 服务
+        sudo systemctl daemon-reload
+        sudo systemctl restart sing-box
+
+        echo -e "${CYAN}sing-box 服务已重启${NC}"      
     else
         echo -e "${RED}sing-box 安装失败，请检查日志或网络配置${NC}"
     fi
