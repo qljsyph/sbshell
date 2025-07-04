@@ -21,7 +21,7 @@ sudo mkdir -p "$SCRIPT_DIR"
 sudo chown "$(whoami)":"$(whoami)" "$SCRIPT_DIR"
 
 # 脚本的URL基础路径
-BASE_URL="https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/debian"
+BASE_URL="https://ghfast.top/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/debian"
                                
 # 脚本列表
 SCRIPTS=(
