@@ -61,14 +61,14 @@ Signed-By: /etc/apt/keyrings/sagernet.asc
         sudo chown -R sing-box:sing-box /etc/sing-box
         sudo chmod 770 /etc/sing-box
         
-        if [ -f /etc/sing-box/cache.db ]; then
-            sudo chown sing-box:sing-box /etc/sing-box/cache.db
-            sudo chmod 660 /etc/sing-box/cache.db
-        else
-            sudo -u sing-box touch /etc/sing-box/cache.db
-            sudo chown sing-box:sing-box /etc/sing-box/cache.db
-            sudo chmod 660 /etc/sing-box/cache.db
-        fi
+        #if [ -f /etc/sing-box/cache.db ]; then
+        #    sudo chown sing-box:sing-box /etc/sing-box/cache.db
+        #    sudo chmod 660 /etc/sing-box/cache.db
+        #else
+        #    sudo -u sing-box touch /etc/sing-box/cache.db
+        #    sudo chown sing-box:sing-box /etc/sing-box/cache.db
+        #    sudo chmod 660 /etc/sing-box/cache.db
+        #fi
         # 获取 sing-box 的版本号
         version_output=$(sing-box version 2>/dev/null)
         version=$(echo "$version_output" | grep -oE '1\.11\.[0-9]+')
