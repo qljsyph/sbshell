@@ -59,6 +59,7 @@ Signed-By: /etc/apt/keyrings/sagernet.asc
         sudo mkdir -p /var/lib/sing-box
         sudo chown -R sing-box:sing-box /var/lib/sing-box
         sudo chown -R sing-box:sing-box /etc/sing-box
+        sudo chmod 770 /etc/sing-box
         if [ -f /etc/sing-box/cache.db ]; then
            sudo chown sing-box:sing-box /etc/sing-box/cache.db
         fi
