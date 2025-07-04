@@ -1,6 +1,6 @@
 #!/bin/bash
 # 定义主脚本的下载URL
-DEBIAN_MAIN_SCRIPT_URL="https://gh-proxy.com/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/debian/menu.sh"
+DEBIAN_MAIN_SCRIPT_URL="https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/debian/menu.sh"
 OPENWRT_MAIN_SCRIPT_URL="https://gh-proxy.com/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/openwrt/menu.sh"
  
 # 脚本下载目录
