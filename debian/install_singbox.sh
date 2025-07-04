@@ -69,6 +69,48 @@ Signed-By: /etc/apt/keyrings/sagernet.asc
             sudo chown sing-box:sing-box /etc/sing-box/cache.db
             sudo chmod 660 /etc/sing-box/cache.db
         fi
+        # 获取 sing-box 的版本号
+        version_output=$(sing-box version 2>/dev/null)
+        version=$(echo "$version_output" | grep -oE '1\.11\.[0-9]+')
+
+        # 检查是否为 1.11.x 版本
+        if [[ -n "$version" ]]; then
+            echo "检测到 sing-box 版本为 $version"
+
+            service_file="/lib/systemd/system/sing-box.service"
+
+            if [[ -f "$service_file" ]]; then
+                echo "找到 sing-box 服务文件：$service_file"
+
+                # 检查是否已有 User=sing-box
+                if grep -q '^\s*User=sing-box' "$service_file"; then
+                    echo "User=sing-box 已存在于 [Service] 下，无需修改。"
+                else
+                    echo "User=sing-box 未设置，准备插入..."
+
+                    # 使用 awk 处理插入 User=sing-box 到 [Service] 段的下一行
+                    awk '
+                        BEGIN { in_service=0 }
+                        /^\[Service\]/ { print; in_service=1; next }
+                        in_service && /^[^\[]/ {
+                            print "User=sing-box"
+                            in_service=0
+                        }
+                        { print }
+                    ' "$service_file" > "${service_file}.tmp" && mv "${service_file}.tmp" "$service_file"
+
+                    echo "已插入 User=sing-box 到 [Service] 段。"
+
+                    # 重新加载 systemd 配置
+                    systemctl daemon-reexec
+                    echo "已执行 systemctl daemon-reexec"
+                fi
+            else
+                echo "未找到服务文件：$service_file"
+            fi
+        else
+            echo "当前 sing-box 版本不是 1.11.x，跳过处理。"
+        fi        
     else
         echo -e "${RED}sing-box 安装失败，请检查日志或网络配置${NC}"
     fi
