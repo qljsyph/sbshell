@@ -80,14 +80,13 @@ Signed-By: /etc/apt/keyrings/sagernet.asc
             service_file="/lib/systemd/system/sing-box.service"
 
             if [[ -f "$service_file" ]]; then
-                echo "找到 sing-box 服务文件：$service_file"
+                echo "已找到服务文件"
 
-                # 检查是否已有 User=sing-box 和 StateDirectory=sing-box
                 has_user=$(grep -E '^\s*User=sing-box' "$service_file")
                 has_state=$(grep -E '^\s*StateDirectory=sing-box' "$service_file")
 
                 if [[ -n "$has_user" && -n "$has_state" ]]; then
-                    echo "[Service] 段中已经包含 User=sing-box 和 StateDirectory=sing-box，无需修改。"
+                    echo -e "${RED}服务已有无需设置${NC}"
                 else
                     echo "准备插入缺失配置..."
 

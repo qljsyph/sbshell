@@ -54,12 +54,12 @@ function setup_singbox_permissions() {
         service_file="/lib/systemd/system/sing-box.service"
 
         if [[ -f "$service_file" ]]; then
-            echo "找到 sing-box 服务文件"
+            echo "已找到服务文件"
             has_user=$(grep -E '^\s*User=sing-box' "$service_file")
             has_state=$(grep -E '^\s*StateDirectory=sing-box' "$service_file")
 
             if [[ -n "$has_user" && -n "$has_state" ]]; then
-                echo "已包含所需条件无需修改。"
+                echo -e "${RED}服务已有无需设置${NC}"
             else
                 echo "准备插入缺失配置..."
                 awk -v add_user="$([[ -z "$has_user" ]] && echo 1 || echo 0)" \
