@@ -15,7 +15,7 @@ NC='\033[0m'
 SCRIPT_DIR="/etc/sing-box/scripts"
 INITIALIZED_FILE="$SCRIPT_DIR/.initialized"
 ROLE_FILE="$SCRIPT_DIR/.role"
-BASE_URL="https://ghfast.top/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/3.0.0/debian"
+BASE_URL="https://ghfast.top/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/debian"
 ROLE="" # 运行角色: client 或 server
 
 # 脚本功能列表，按功能分组
