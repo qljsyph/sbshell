@@ -11,7 +11,7 @@ SCRIPT_DIR="/etc/sing-box/scripts"
 TEMP_DIR="/tmp/sing-box"
 
 # 脚本的URL基础路径
-BASE_URL="https://gh-proxy.com/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/openwrt"
+BASE_URL="https://ghfast.top/https://raw.githubusercontent.com/qljsyph/sbshell/refs/heads/main/openwrt"
 
 # 初始下载菜单脚本的URL
 MENU_SCRIPT_URL="$BASE_URL/menu.sh"

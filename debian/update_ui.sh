@@ -4,9 +4,9 @@ UI_DIR="/etc/sing-box/ui"
 BACKUP_DIR="/tmp/sing-box/ui_backup"
 TEMP_DIR="/tmp/sing-box-ui"
 
-ZASHBOARD_URL="https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
-METACUBEXD_URL="https://gh-proxy.com/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
-YACD_URL="https://gh-proxy.com/https://github.com/MetaCubeX/Yacd-meta/archive/refs/heads/gh-pages.zip"
+ZASHBOARD_URL="https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+METACUBEXD_URL="https://ghfast.top/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+YACD_URL="https://ghfast.top/https://github.com/MetaCubeX/Yacd-meta/archive/refs/heads/gh-pages.zip"
 
 # 创建备份目录
 mkdir -p "$BACKUP_DIR"
@@ -29,7 +29,7 @@ unzip_with_busybox() {
 
 get_download_url() {
     CONFIG_FILE="/etc/sing-box/config.json"
-    DEFAULT_URL="https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+    DEFAULT_URL="https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
     
     if [ -f "$CONFIG_FILE" ]; then
         URL=$(grep -oP '(?<="external_ui_download_url": ")[^"]*' "$CONFIG_FILE")
@@ -132,7 +132,7 @@ setup_auto_update_ui() {
 #!/bin/bash
 
 CONFIG_FILE="/etc/sing-box/config.json"
-DEFAULT_URL="https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
+DEFAULT_URL="https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 URL=\$(grep -oP '(?<="external_ui_download_url": ")[^"]*' "\$CONFIG_FILE")
 URL="\${URL:-\$DEFAULT_URL}"
 
