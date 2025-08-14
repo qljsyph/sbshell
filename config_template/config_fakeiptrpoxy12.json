@@ -1,7 +1,7 @@
 {
   "dns": {
     "servers": [
-      {"tag": "local", "type": "udp", "server": "223.5.5.5"},
+      {"tag": "local", "type": "udp", "server": "114.114.114.114"},
       {"tag": "public", "type": "udp", "server": "223.5.5.5"},
       {"tag": "foreign", "type": "udp", "server": "8.8.8.8"},
       {"tag": "fakeip", "type": "fakeip", "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18"}
